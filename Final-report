@@ -161,5 +161,48 @@ void main()
  	printf("\n\n\n\t\tAverage_Waiting_Time of all the processes is %.2lf units",avgWait_t/n);
 	printf("\n\n\t\tAverage_TurnAround_Time of all the processes is %.2lf units\n\n\n\n",avgTurnAround_t/n); 
 }
+1.Description 
+ 
+It’s a process scheduling mechanism done by the scheduler in the operating systems. According to the given scheduling approach it’s a non-preemptive( it is not moved from running queue without the process requesting it), shortest job first in nature approach (in which the shortest job is given the most priority) but here we also have to consider the waiting time of each and every processes, the process which has been waiting for a long time is increased with its priority which prevents the case of starvation on the basis of the formula given in the question i.e:  
+ 
+Priority=1+Waiting time/ Estimated runtime 
+ 
+2.Algorithms
+ 
+• Algorithm to find the minimum arrival time of the process i.e.  
+ 
+o	In this function the priority of the process is assumed to be (-1) whichever process has been executed completely. 
+o	In this function it’s also checked that if the two process arrives at the same time then which process is given more priority. 
+ 
+# all the required variables are declared globally 
+void findMinTime(struct Process *obj) 
+{ 
+	 	int min_arrtime=65537; 
+	 	for(i=0;i<n;i++) 
+	 	{ 
+	 	 	if(obj[i].priority== -1) 
+	 	 	 	continue; 
+	 	 	if(min_arrtime==obj[i].arr_t) 
+	 	 	{ 
+	 	 	 	if(obj[i].estRun_t<runTime) 
+	 	 	 	{ 
+ 	 	 	 	strcpy(cur_process,obj[i].process);
+				runTime=obj[i].estRun_t; 
+	 	 	 	min_arrtime=obj[i].arr_t; 	 	 
+	 	 	 	} 
+	 	 	} 
+	 	 	else if(min_arrtime>obj[i].arr_t) 
+	 	 	{ 
+ 	 	 	strcpy(cur_process,obj[i].process);
+			runTime=obj[i].estRun_t; 
+	 	 	min_arrtime=obj[i].arr_t; 
+	 	 	} 
+ 	 
+	 	} 
+	 	cur_time=min_arrtime; 
+	 	return; 
+}
+
+
 
 
